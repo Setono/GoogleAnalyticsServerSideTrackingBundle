@@ -1,0 +1,55 @@
+{
+    "name": "setono/google-analytics-server-side-tracking-bundle",
+    "type": "symfony-bundle",
+    "description": "A Symfony bundle that allows you to track your visitors server side instead of client side",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joachim Løvgaard",
+            "email": "joachim@loevgaard.dk"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "setono/google-analytics-measurement-protocol": "^1.0@dev",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/http-foundation": "^4.4 || ^5.0.7",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "thecodingmachine/safe": "^1.0"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "nyholm/symfony-bundle-test": "^1.6",
+        "phpunit/phpunit": "^9.4",
+        "roave/security-advisories": "dev-master",
+        "setono/code-quality-pack": "^1.4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\Tests\\": "tests/"
+        }
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "analyse": "phpstan analyse -c phpstan.neon -l max src/",
+        "check-style": "ecs check src/ tests/",
+        "fix-style": "ecs check --fix src/ tests/",
+        "phpspec": "phpspec run",
+        "phpunit": "phpunit"
+    }
+}
