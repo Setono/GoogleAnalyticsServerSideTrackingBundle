@@ -11,18 +11,24 @@
     ],
     "require": {
         "php": "^7.4",
+        "doctrine/orm": "^2.7",
+        "doctrine/persistence": "^2.1",
         "setono/google-analytics-measurement-protocol": "^1.0@dev",
+        "stof/doctrine-extensions-bundle": "^1.5",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/event-dispatcher": "^4.4 || ^5.0",
         "symfony/http-foundation": "^4.4 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/uid": "^5.0",
         "thecodingmachine/safe": "^1.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "nyholm/symfony-bundle-test": "^1.6",
+        "phpstan/phpstan-symfony": "^0.12.11",
         "phpunit/phpunit": "^9.4",
+        "psalm/plugin-symfony": "^2.0",
         "roave/security-advisories": "dev-master",
         "setono/code-quality-pack": "^1.4"
     },
@@ -46,7 +52,10 @@
     },
     "prefer-stable": true,
     "scripts": {
-        "analyse": "phpstan analyse -c phpstan.neon -l max src/",
+        "analyse": [
+            "phpstan analyse -c phpstan.neon",
+            "psalm"
+        ],
         "check-style": "ecs check src/ tests/",
         "fix-style": "ecs check --fix src/ tests/",
         "phpspec": "phpspec run",

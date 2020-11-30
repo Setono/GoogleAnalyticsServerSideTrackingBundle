@@ -11,11 +11,13 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
+        /** @psalm-suppress PossiblyNullArgument */
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
-        $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
+        $container->setParameter('setono_google_analytics_server_side_tracking.cookie_key', $config['cookie_key']);
+        $container->setParameter('setono_google_analytics_server_side_tracking.measurement_ids', $config['measurement_ids']);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');

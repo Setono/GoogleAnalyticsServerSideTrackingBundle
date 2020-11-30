@@ -4,8 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_google_analytics_server_side_tracking.provider.parameter_property"
-                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\ParameterPropertyProvider">
-            <argument>%setono_google_analytics_server_side_tracking.properties%</argument>
+                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\ParameterMeasurementIdProvider">
+            <argument>%setono_google_analytics_server_side_tracking.measurement_ids%</argument>
         </service>
     </services>
 </container>
