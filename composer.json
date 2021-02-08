@@ -43,7 +43,12 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
-        }
+        },
+        "unused": [
+            "gedmo/doctrine-extensions",
+            "nyholm/psr7",
+            "symfony/http-client"
+        ]
     },
     "autoload": {
         "psr-4": {
