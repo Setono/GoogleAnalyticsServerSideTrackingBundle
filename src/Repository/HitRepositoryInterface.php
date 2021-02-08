@@ -15,7 +15,7 @@ interface HitRepositoryInterface extends ObjectRepository, ServiceEntityReposito
      *
      * @param int $delay in seconds
      *
-     * @return HitInterface[]
+     * @return array<array-key, HitInterface>
      */
     public function findConsentedWithDelay(int $delay): array;
 }

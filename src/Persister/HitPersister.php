@@ -1,43 +1,38 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Persister;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilderInterface;
-use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use function Safe\sprintf;
+use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
 
 final class HitPersister implements HitPersisterInterface
 {
     private ManagerRegistry $managerRegistry;
 
-    private ValidatorInterface $validator;
-
-    public function __construct(ManagerRegistry $managerRegistry, ValidatorInterface $validator) {
-
-        $this->managerRegistry = $managerRegistry;
-        $this->validator = $validator;
-    }
-    public function persistBuilder(HitBuilderInterface $builder): void
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        if($this->validator->validate($builder)->count() > 0) {
-            return;
-        }
+        $this->managerRegistry = $managerRegistry;
+    }
 
-        $hitValueObject = $builder->getHit();
-
-        $hit = new Hit();
-        $hit->setQuery($hitValueObject->getQuery());
-        $hit->setClientId($hitValueObject->getClientId());
-
-        $manager = $this->managerRegistry->getManagerForClass($hit);
-        if(null === $manager) {
+    public function persistBuilder(HitBuilder $builder): void
+    {
+        $manager = $this->managerRegistry->getManagerForClass(Hit::class);
+        if (null === $manager) {
             throw new \LogicException(sprintf('No object manager associated with class %s', Hit::class));
         }
 
-        $manager->persist($hit);
+        foreach ($builder->getHits() as $hit) {
+            $obj = new Hit();
+            $obj->setQuery($hit->getPayload()->getValue());
+            $obj->setClientId($hit->getClientId());
+
+            $manager->persist($obj);
+        }
+
         $manager->flush();
     }
 }

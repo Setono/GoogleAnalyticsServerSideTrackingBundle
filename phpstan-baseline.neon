@@ -1,7 +1,7 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
+			message: "#^Cannot call method end\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#"
 			count: 1
 			path: src/DependencyInjection/Configuration.php
 
@@ -9,3 +9,9 @@ parameters:
 			message: "#^Parameter \\#1 \\$configuration of method Symfony\\\\Component\\\\DependencyInjection\\\\Extension\\\\Extension\\:\\:processConfiguration\\(\\) expects Symfony\\\\Component\\\\Config\\\\Definition\\\\ConfigurationInterface, Symfony\\\\Component\\\\Config\\\\Definition\\\\ConfigurationInterface\\|null given\\.$#"
 			count: 1
 			path: src/DependencyInjection/SetonoGoogleAnalyticsServerSideTrackingExtension.php
+
+		-
+			message: "#^Method Setono\\\\GoogleAnalyticsServerSideTrackingBundle\\\\Resolver\\\\CookieBasedClientIdResolver\\:\\:resolve\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Resolver/CookieBasedClientIdResolver.php
+

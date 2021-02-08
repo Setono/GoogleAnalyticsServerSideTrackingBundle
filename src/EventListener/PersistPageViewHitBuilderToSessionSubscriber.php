@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\PersistableQueryBuilderInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PersistPageViewHitBuilderToSessionSubscriber implements EventSubscriberInterface
 {
-    private HitBuilderInterface $pageViewHitBuilder;
+    private HitBuilder $pageViewHitBuilder;
 
-    public function __construct(HitBuilderInterface $pageViewHitBuilder)
+    public function __construct(HitBuilder $pageViewHitBuilder)
     {
         $this->pageViewHitBuilder = $pageViewHitBuilder;
     }
@@ -40,10 +39,6 @@ final class PersistPageViewHitBuilderToSessionSubscriber implements EventSubscri
          * to the database to be able to send the hit to Google Analytics
          */
         if ($statusCode >= 200 && $statusCode < 300) {
-            return;
-        }
-
-        if (!$this->pageViewHitBuilder instanceof PersistableQueryBuilderInterface) {
             return;
         }
 

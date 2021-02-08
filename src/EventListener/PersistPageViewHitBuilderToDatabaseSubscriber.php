@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilderInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -12,10 +12,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PersistPageViewHitBuilderToDatabaseSubscriber implements EventSubscriberInterface
 {
-    private HitBuilderInterface $pageViewHitBuilder;
+    private HitBuilder $pageViewHitBuilder;
+
     private HitPersisterInterface $hitPersister;
 
-    public function __construct(HitBuilderInterface $pageViewHitBuilder, HitPersisterInterface $hitPersister)
+    public function __construct(HitBuilder $pageViewHitBuilder, HitPersisterInterface $hitPersister)
     {
         $this->pageViewHitBuilder = $pageViewHitBuilder;
         $this->hitPersister = $hitPersister;

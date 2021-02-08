@@ -2,6 +2,7 @@ includes:
 	- 'phpstan-baseline.neon'
 
 parameters:
+	checkGenericClassInNonGenericObjectType: false
 	checkMissingIterableValueType: false
 
 	level: max

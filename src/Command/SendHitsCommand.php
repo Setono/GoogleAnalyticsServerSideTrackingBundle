@@ -35,7 +35,7 @@ final class SendHitsCommand extends Command
         $hits = $this->hitRepository->findConsentedWithDelay($this->delay);
 
         foreach ($hits as $hit) {
-            $this->client->sendHit($hit->getQuery());
+            $this->client->sendHit((string) $hit->getQuery());
         }
 
         return 0;

@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\PersistableQueryBuilderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\RequestAwareQueryBuilderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\ResponseAwareQueryBuilderInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Setono\GoogleAnalyticsMeasurementProtocol\Response\Adapter\SymfonyResponseAdapter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,9 +14,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInterface
 {
-    private HitBuilderInterface $pageViewHitBuilder;
+    private HitBuilder $pageViewHitBuilder;
 
-    public function __construct(HitBuilderInterface $pageViewHitBuilder)
+    public function __construct(HitBuilder $pageViewHitBuilder)
     {
         $this->pageViewHitBuilder = $pageViewHitBuilder;
     }
@@ -39,22 +36,13 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
             return;
         }
 
-        if ($this->pageViewHitBuilder instanceof PersistableQueryBuilderInterface) {
-            $this->pageViewHitBuilder->restore();
-        }
-
-        if ($this->pageViewHitBuilder instanceof RequestAwareQueryBuilderInterface) {
-            $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($event->getRequest()));
-        }
+        $this->pageViewHitBuilder->restore();
+        $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($event->getRequest()));
     }
 
     public function populateFromResponse(ResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
-            return;
-        }
-
-        if (!$this->pageViewHitBuilder instanceof ResponseAwareQueryBuilderInterface) {
             return;
         }
 
