@@ -3,11 +3,11 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_google_analytics_server_side_tracking.command.send_events"
-                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Command\SendEventsCommand">
-            <argument type="service" id="http_client"/>
-            <argument type="service" id="http_client"/>
-            <argument type="service" id="http_client"/>
+        <service id="setono_google_analytics_server_side_tracking.command.send_hits"
+                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Command\SendHitsCommand">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.client"/>
+            <argument type="service" id="setono_google_analytics_server_side_tracking.repository.hit"/>
+            <argument>%setono_google_analytics_server_side_tracking.send_delay%</argument>
         </service>
     </services>
 </container>

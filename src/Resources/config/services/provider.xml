@@ -3,9 +3,29 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_google_analytics_server_side_tracking.provider.parameter_property"
-                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\ParameterMeasurementIdProvider">
-            <argument>%setono_google_analytics_server_side_tracking.measurement_ids%</argument>
+        <service
+            id="setono_google_analytics_server_side_tracking.event_listener.persist_page_view_hit_builder_to_database_subscriber"
+            class="Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToDatabaseSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
+            <argument type="service" id="setono_google_analytics_server_side_tracking.persister.hit"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service
+            id="setono_google_analytics_server_side_tracking.event_listener.persist_page_view_hit_builder_to_session_subscriber"
+            class="Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToSessionSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service
+            id="setono_google_analytics_server_side_tracking.event_listener.populate_page_view_hit_builder_subscriber"
+            class="Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PopulatePageViewHitBuilderSubscriber">
+            <argument type="service" id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
+
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

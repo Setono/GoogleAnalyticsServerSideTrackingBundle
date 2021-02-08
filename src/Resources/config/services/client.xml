@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface"
+                 alias="setono_google_analytics_server_side_tracking.client"/>
+
+        <service id="setono_google_analytics_server_side_tracking.client"
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Client\Client">
+            <argument type="service" id="psr18.http_client"/>
+        </service>
+    </services>
+</container>
