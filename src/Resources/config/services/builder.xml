@@ -7,7 +7,7 @@
     </parameters>
     <services>
         <!-- This alias will autowire the builder interface to the page view builder -->
-        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilderInterface"
+        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder"
                  alias="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
 
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
