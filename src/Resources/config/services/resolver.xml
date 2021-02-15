@@ -7,6 +7,12 @@
         <parameter key="setono_google_analytics_server_side_tracking.cookie_key">sgasst_client_id</parameter>
     </parameters>
     <services>
+        <service id="Setono\GoogleAnalyticsServerSideTrackingBundle\Resolver\ClientIdResolverInterface"
+                 alias="setono_sylius_analytics.resolver.default_client_id_resolver"/>
+
+        <service id="setono_sylius_analytics.resolver.default_client_id_resolver"
+                 alias="setono_sylius_analytics.resolver.cookie_based_client_id"/>
+
         <service id="setono_sylius_analytics.resolver.cookie_based_client_id"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Resolver\CookieBasedClientIdResolver">
             <argument type="service" id="request_stack"/>
