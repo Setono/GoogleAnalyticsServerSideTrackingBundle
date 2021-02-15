@@ -2,8 +2,12 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <!-- DO NOT edit this parameter after launch. This will result in lost data in your Analytics -->
+        <parameter key="setono_google_analytics_server_side_tracking.cookie_key">sgasst_client_id</parameter>
+    </parameters>
     <services>
-        <service id="setono_sylius_analytics.resolver.client_id"
+        <service id="setono_sylius_analytics.resolver.cookie_based_client_id"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Resolver\CookieBasedClientIdResolver">
             <argument type="service" id="request_stack"/>
             <argument>%setono_google_analytics_server_side_tracking.cookie_key%</argument>

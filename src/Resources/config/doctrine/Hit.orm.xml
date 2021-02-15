@@ -5,13 +5,12 @@
                   xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Event"
-            table="setono_google_analytics_server_side_tracking__event">
+    <entity name="Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit"
+            table="setono_google_analytics_server_side_tracking__hit">
         <id name="id" type="string"/>
         <field name="clientId" type="string"/>
-        <field name="userId" type="string" nullable="true"/>
-        <field name="consent" type="boolean"/>
-        <field name="event" type="object"/>
+        <field name="consentGranted" type="boolean"/>
+        <field name="query" type="text"/>
 
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>

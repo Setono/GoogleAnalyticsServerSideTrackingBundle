@@ -44,7 +44,7 @@ final class CookieBasedClientIdResolver implements ClientIdResolverInterface, Ev
         }
 
         if (null === $this->clientId) {
-            $this->clientId = $request->cookies->has($this->cookieKey) ? $request->cookies->get($this->cookieKey, '') : (string) Uuid::v4();
+            $this->clientId = $request->cookies->get($this->cookieKey) ?? (string) Uuid::v4();
         }
 
         return $this->clientId;
