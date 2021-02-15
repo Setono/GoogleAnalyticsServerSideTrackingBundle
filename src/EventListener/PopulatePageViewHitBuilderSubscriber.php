@@ -26,7 +26,7 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
         // todo validate priorities
         return [
             KernelEvents::REQUEST => ['populateFromRequestAndRestore', 1000],
-            KernelEvents::RESPONSE => ['populateFromResponse', 1000],
+            KernelEvents::RESPONSE => ['populateFromResponse', 950],
         ];
     }
 
