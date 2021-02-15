@@ -10,6 +10,7 @@
         <service id="Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder"
                  alias="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
 
+        <!-- todo needs to be made in a factory, so we can use the property provider service to inject properties -->
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
                  class="Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder">
             <argument>%setono_google_analytics_server_side_tracking.properties%</argument>

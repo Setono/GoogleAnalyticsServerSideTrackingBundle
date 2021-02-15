@@ -17,8 +17,6 @@
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Resolver\CookieBasedClientIdResolver">
             <argument type="service" id="request_stack"/>
             <argument>%setono_google_analytics_server_side_tracking.cookie_key%</argument>
-
-            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

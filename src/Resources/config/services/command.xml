@@ -8,6 +8,7 @@
             <argument type="service" id="setono_google_analytics_server_side_tracking.client"/>
             <argument type="service" id="setono_google_analytics_server_side_tracking.repository.hit"/>
             <argument>%setono_google_analytics_server_side_tracking.send_delay%</argument>
+            <tag name="console.command"/>
         </service>
     </services>
 </container>
