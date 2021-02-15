@@ -17,12 +17,13 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @psalm-suppress MixedMethodCall, PossiblyNullReference, PossiblyUndefinedMethod */
         $rootNode
             ->addDefaultsIfNotSet()
             ->fixXmlConfig('property')
             ->children()
                 ->arrayNode('properties')
-                    ->info('A list of Google Analytics properties to track')
+                    ->info('A list of Google Analytics properties to track. Notice that you can implement your own property provider by implementing the interface Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\PropertyProviderInterface. This way you can get the properties from a database or any other source.')
                     ->scalarPrototype()
                         ->info('The Google Analytics property id')
                         ->example('UA-1234-5')
