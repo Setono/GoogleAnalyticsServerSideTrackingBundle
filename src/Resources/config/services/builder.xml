@@ -12,7 +12,6 @@
 
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
                  class="Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder">
-            <argument type="service" id="setono_google_analytics_server_side_tracking.storage.session"/>
             <argument>%setono_google_analytics_server_side_tracking.properties%</argument>
             <call method="setStorage">
                 <argument type="service" id="setono_google_analytics_server_side_tracking.storage.session"/>
