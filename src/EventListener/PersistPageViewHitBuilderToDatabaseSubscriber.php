@@ -35,6 +35,12 @@ final class PersistPageViewHitBuilderToDatabaseSubscriber implements EventSubscr
         if (!$event->isMasterRequest()) {
             return;
         }
+
+        $request = $event->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            return;
+        }
+
         $statusCode = $event->getResponse()->getStatusCode();
 
         if ($statusCode < 200 || $statusCode >= 300) {

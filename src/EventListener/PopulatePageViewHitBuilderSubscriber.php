@@ -36,13 +36,23 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
             return;
         }
 
+        $request = $event->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            return;
+        }
+
         $this->pageViewHitBuilder->restore();
-        $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($event->getRequest()));
+        $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
     }
 
     public function populateFromResponse(ResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        if ($request->isXmlHttpRequest()) {
             return;
         }
 

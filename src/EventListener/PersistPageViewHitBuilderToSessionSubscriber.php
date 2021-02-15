@@ -31,6 +31,12 @@ final class PersistPageViewHitBuilderToSessionSubscriber implements EventSubscri
         if (!$event->isMasterRequest()) {
             return;
         }
+
+        $request = $event->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            return;
+        }
+
         $statusCode = $event->getResponse()->getStatusCode();
 
         /**
