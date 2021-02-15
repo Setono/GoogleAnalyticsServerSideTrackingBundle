@@ -8,6 +8,7 @@ use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Safe\DateTime;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
+use Webmozart\Assert\Assert;
 
 class HitRepository extends ServiceEntityRepository implements HitRepositoryInterface
 {
@@ -18,7 +19,7 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
     {
         $then = (new DateTime())->sub(new DateInterval("PT{$delay}S"));
 
-        return $this->createQueryBuilder('o')
+        $result = $this->createQueryBuilder('o')
             ->andWhere('o.createdAt < :then')
             ->andWhere('o.consentGranted = true')
             ->setParameter('then', $then)
@@ -26,5 +27,10 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
             ->getQuery()
             ->getResult()
         ;
+
+        Assert::isArray($result);
+        Assert::allIsInstanceOf($result, HitInterface::class);
+
+        return $result;
     }
 }

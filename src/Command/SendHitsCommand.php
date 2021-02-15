@@ -12,7 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class SendHitsCommand extends Command
 {
-    /** @var string */
     protected static $defaultName = 'setono:google-analytics:send-hits';
 
     private ClientInterface $client;
