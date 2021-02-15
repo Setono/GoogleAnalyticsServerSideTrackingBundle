@@ -7,6 +7,7 @@
         <import resource="services/client.xml"/>
         <import resource="services/command.xml"/>
         <import resource="services/event_listener.xml"/>
+        <import resource="services/factory.xml"/>
         <import resource="services/persister.xml"/>
         <import resource="services/provider.xml"/>
         <import resource="services/repository.xml"/>
