@@ -62,10 +62,7 @@
     },
     "prefer-stable": true,
     "scripts": {
-        "analyse": [
-            "phpstan analyse",
-            "psalm"
-        ],
+        "analyse": "psalm",
         "check-style": "ecs check",
         "fix-style": "ecs check --fix",
         "phpspec": "phpspec run",
