@@ -8,7 +8,7 @@ use DateTimeInterface;
 
 interface HitInterface
 {
-    public function getId(): ?int;
+    public function getId(): string;
 
     public function getClientId(): ?string;
 

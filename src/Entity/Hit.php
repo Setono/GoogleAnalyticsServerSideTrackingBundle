@@ -6,10 +6,11 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 
 use DateTimeInterface;
 use Safe\DateTime;
+use Symfony\Component\Uid\Uuid;
 
 class Hit implements HitInterface
 {
-    protected ?int $id = null;
+    protected string $id;
 
     protected ?string $clientId = null;
 
@@ -23,10 +24,11 @@ class Hit implements HitInterface
 
     public function __construct()
     {
+        $this->id = (string) Uuid::v4();
         $this->createdAt = new DateTime();
     }
 
-    public function getId(): ?int
+    public function getId(): string
     {
         return $this->id;
     }
