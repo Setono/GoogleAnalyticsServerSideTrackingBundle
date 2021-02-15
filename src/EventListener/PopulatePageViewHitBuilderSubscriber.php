@@ -23,10 +23,15 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
 
     public static function getSubscribedEvents(): array
     {
-        // todo validate priorities
+        /*
+         * The priority needs to be lower than Symfony\Component\HttpKernel\EventListener\SessionListener
+         * which is 128, but still higher than 0 so that people can listen to the request event without
+         * worrying about priorities
+         */
+        // todo test these priorities in phpunit if possible (maybe the TagBagBundle does this?)
         return [
-            KernelEvents::REQUEST => ['populateFromRequestAndRestore', 1000],
-            KernelEvents::RESPONSE => ['populateFromResponse', 950],
+            KernelEvents::REQUEST => ['populateFromRequestAndRestore', 100],
+            KernelEvents::RESPONSE => ['populateFromResponse', 90],
         ];
     }
 

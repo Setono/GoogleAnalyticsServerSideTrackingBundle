@@ -20,9 +20,14 @@ final class PersistPageViewHitBuilderToSessionSubscriber implements EventSubscri
 
     public static function getSubscribedEvents(): array
     {
-        // todo validate priorities
+        /*
+         * The priority needs to be higher than Symfony\Component\HttpKernel\EventListener\SessionListener
+         * which is -1000, but still lower than 0 so that people can listen to the response event without
+         * worrying about priorities
+         */
+        // todo test these priorities in phpunit if possible (maybe the TagBagBundle does this?)
         return [
-            KernelEvents::RESPONSE => ['persist', -1000],
+            KernelEvents::RESPONSE => ['persist', -900],
         ];
     }
 
