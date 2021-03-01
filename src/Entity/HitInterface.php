@@ -8,6 +8,12 @@ use DateTimeInterface;
 
 interface HitInterface
 {
+    public const STATE_PENDING = 'pending';
+
+    public const STATE_SENT = 'sent';
+
+    public const STATE_FAILED = 'failed';
+
     public function getId(): string;
 
     public function getClientId(): ?string;
@@ -21,6 +27,10 @@ interface HitInterface
     public function getQuery(): ?string;
 
     public function setQuery(string $query): void;
+
+    public function getState(): string;
+
+    public function setState(string $state): void;
 
     public function getCreatedAt(): DateTimeInterface;
 

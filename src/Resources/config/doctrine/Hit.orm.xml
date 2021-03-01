@@ -11,6 +11,7 @@
         <field name="clientId" type="string"/>
         <field name="consentGranted" type="boolean"/>
         <field name="query" type="text"/>
+        <field name="state" type="string"/>
 
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>

@@ -18,6 +18,8 @@ class Hit implements HitInterface
 
     protected ?string $query = null;
 
+    protected string $state = self::STATE_PENDING;
+
     protected DateTimeInterface $createdAt;
 
     protected ?DateTimeInterface $updatedAt = null;
@@ -61,6 +63,16 @@ class Hit implements HitInterface
     public function setQuery(string $query): void
     {
         $this->query = $query;
+    }
+
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    public function setState(string $state): void
+    {
+        $this->state = $state;
     }
 
     public function getCreatedAt(): DateTimeInterface

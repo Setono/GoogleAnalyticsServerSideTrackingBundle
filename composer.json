@@ -25,6 +25,7 @@
         "symfony/http-foundation": "^4.4 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.1.5",
         "symfony/uid": "^5.1",
+        "symfony/workflow": "^4.4 || ^5.0",
         "thecodingmachine/safe": "^1.0",
         "webmozart/assert": "^1.9"
     },
@@ -36,6 +37,7 @@
         "psalm/plugin-symfony": "^2.1",
         "roave/security-advisories": "dev-master",
         "setono/code-quality-pack": "^2.0.1",
+        "webfactory/doctrine-orm-test-infrastructure": "^1.9",
         "weirdan/doctrine-psalm-plugin": "^1.0"
     },
     "config": {

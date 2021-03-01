@@ -11,11 +11,22 @@ use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 interface HitRepositoryInterface extends ObjectRepository, ServiceEntityRepositoryInterface
 {
     /**
-     * Will return hits with consent created before $delay
+     * Returns true if there are pending consented hits created before $delay seconds ago
      *
      * @param int $delay in seconds
+     */
+    public function hasConsentedPending(int $delay = 0): bool;
+
+    /**
+     * Will assign the given bulk identifier to pending consented hits
      *
+     * @param int $delay in seconds
+     * @param int $limit maximum number of rows to update
+     */
+    public function assignBulkIdentifierToPendingConsented(string $bulkIdentifier, int $delay = 0, int $limit = 1000): void;
+
+    /**
      * @return array<array-key, HitInterface>
      */
-    public function findConsentedWithDelay(int $delay): array;
+    public function findByBulkIdentifier(string $bulkIdentifier): array;
 }
