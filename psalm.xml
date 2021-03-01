@@ -15,4 +15,7 @@
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>
+    <issueHandlers>
+        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info" />
+    </issueHandlers>
 </psalm>
