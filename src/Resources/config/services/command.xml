@@ -7,6 +7,8 @@
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Command\SendHitsCommand">
             <argument type="service" id="setono_google_analytics_server_side_tracking.client"/>
             <argument type="service" id="setono_google_analytics_server_side_tracking.repository.hit"/>
+            <argument type="service" id="workflow.registry"/>
+            <argument type="service" id="doctrine"/>
             <argument>%setono_google_analytics_server_side_tracking.send_delay%</argument>
             <tag name="console.command"/>
         </service>
