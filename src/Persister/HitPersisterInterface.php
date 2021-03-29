@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Persister;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 
 interface HitPersisterInterface
 {

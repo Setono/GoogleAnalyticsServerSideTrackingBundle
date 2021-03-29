@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;

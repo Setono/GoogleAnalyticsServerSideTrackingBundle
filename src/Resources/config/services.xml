@@ -3,11 +3,10 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/builder.xml"/>
         <import resource="services/client.xml"/>
         <import resource="services/command.xml"/>
         <import resource="services/event_listener.xml"/>
-        <import resource="services/factory.xml"/>
+        <import resource="services/hit.xml"/>
         <import resource="services/persister.xml"/>
         <import resource="services/provider.xml"/>
         <import resource="services/repository.xml"/>

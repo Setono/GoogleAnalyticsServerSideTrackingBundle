@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Tests\EventListener;
 
 use PHPUnit\Framework\TestCase;
-use Setono\GoogleAnalyticsMeasurementProtocol\Builder\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToDatabaseSubscriber;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
