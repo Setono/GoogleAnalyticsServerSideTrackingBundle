@@ -52,6 +52,7 @@
         "unused": [
             "gedmo/doctrine-extensions",
             "nyholm/psr7",
+            "setono/client-id-bundle",
             "symfony/http-client"
         ]
     },
