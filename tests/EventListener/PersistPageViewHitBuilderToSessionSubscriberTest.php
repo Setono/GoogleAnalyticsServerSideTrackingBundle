@@ -9,11 +9,14 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Storage\StorageInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToSessionSubscriber;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
  * @covers \Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToSessionSubscriber
@@ -50,11 +53,26 @@ final class PersistPageViewHitBuilderToSessionSubscriberTest extends TestCase
             {
                 parent::__construct('test', true);
             }
+
+            public function registerBundles()
+            {
+                // TODO: Implement registerBundles() method.
+            }
+
+            protected function configureRoutes(RouteCollectionBuilder $routes)
+            {
+                // TODO: Implement configureRoutes() method.
+            }
+
+            protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
+            {
+                // TODO: Implement configureContainer() method.
+            }
         };
 
         $event = new ResponseEvent($kernel, new Request(), HttpKernelInterface::MASTER_REQUEST, new Response('', 301));
 
-        $hitBuilder = new HitBuilder(['UA-123-45']);
+        $hitBuilder = new HitBuilder();
         $hitBuilder->setStorage($storage, 'storage');
 
         $subscriber = new PersistPageViewHitBuilderToSessionSubscriber($hitBuilder);

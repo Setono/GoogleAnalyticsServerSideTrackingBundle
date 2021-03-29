@@ -9,13 +9,16 @@
             "email": "joachim@loevgaard.dk"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "doctrine/doctrine-bundle": "^1.12 || ^2.2",
         "doctrine/orm": "^2.7",
         "doctrine/persistence": "^1.3",
         "gedmo/doctrine-extensions": "^2.4",
         "nyholm/psr7": "^1.3",
+        "setono/client-id": "dev-master",
+        "setono/client-id-bundle": "dev-master",
         "setono/google-analytics-measurement-protocol": "^1.0@dev",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/console": "^4.4 || ^5.0",
@@ -35,7 +38,7 @@
         "nyholm/symfony-bundle-test": "^1.7",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.1",
-        "roave/security-advisories": "dev-master",
+        "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.0.1",
         "webfactory/doctrine-orm-test-infrastructure": "^1.9",
         "weirdan/doctrine-psalm-plugin": "^1.0"

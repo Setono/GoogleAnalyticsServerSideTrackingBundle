@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
+use Setono\ClientId\Provider\ClientIdProviderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Setono\GoogleAnalyticsMeasurementProtocol\Response\Adapter\SymfonyResponseAdapter;
-use Setono\GoogleAnalyticsServerSideTrackingBundle\Resolver\ClientIdResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -17,12 +17,12 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
 {
     private HitBuilder $pageViewHitBuilder;
 
-    private ClientIdResolverInterface $clientIdResolver;
+    private ClientIdProviderInterface $clientIdProvider;
 
-    public function __construct(HitBuilder $pageViewHitBuilder, ClientIdResolverInterface $clientIdResolver)
+    public function __construct(HitBuilder $pageViewHitBuilder, ClientIdProviderInterface $clientIdProvider)
     {
         $this->pageViewHitBuilder = $pageViewHitBuilder;
-        $this->clientIdResolver = $clientIdResolver;
+        $this->clientIdProvider = $clientIdProvider;
     }
 
     public static function getSubscribedEvents(): array
@@ -52,7 +52,7 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
 
         $this->pageViewHitBuilder->restore();
         $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
-        $this->pageViewHitBuilder->setClientId($this->clientIdResolver->resolve());
+        $this->pageViewHitBuilder->setClientId($this->clientIdProvider->get()->toString());
     }
 
     public function populateFromResponse(ResponseEvent $event): void
