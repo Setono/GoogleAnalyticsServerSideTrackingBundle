@@ -8,8 +8,6 @@
                  alias="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
 
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
-                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder">
-            <factory service="setono_google_analytics_server_side_tracking.factory.hit_builder" method="create"/>
-        </service>
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder"/>
     </services>
 </container>

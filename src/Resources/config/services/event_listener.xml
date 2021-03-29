@@ -22,7 +22,7 @@
             id="setono_google_analytics_server_side_tracking.event_listener.populate_page_view_hit_builder_subscriber"
             class="Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PopulatePageViewHitBuilderSubscriber">
             <argument type="service" id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
-            <argument type="service" id="setono_sylius_analytics.resolver.default_client_id_resolver"/>
+            <argument type="service" id="setono_client_id.provider.default_client_id"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
