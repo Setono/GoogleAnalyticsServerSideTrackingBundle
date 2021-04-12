@@ -6,7 +6,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 
 use DateTimeInterface;
 use Safe\DateTime;
-use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Symfony\Component\Uid\Uuid;
 
 class Hit implements HitInterface
@@ -31,7 +31,7 @@ class Hit implements HitInterface
         $this->createdAt = new DateTime();
     }
 
-    public static function createFromHitbuilder(HitBuilder $hitBuilder, string $property): self
+    public static function createFromHitBuilder(HitBuilderInterface $hitBuilder, string $property): self
     {
         $obj = new self();
         $obj->setClientId($hitBuilder->getClientId());

@@ -6,7 +6,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Persister;
 
 use Doctrine\Persistence\ManagerRegistry;
 use function Safe\sprintf;
-use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\PropertyProviderInterface;
 
@@ -22,7 +22,7 @@ final class HitPersister implements HitPersisterInterface
         $this->propertyProvider = $propertyProvider;
     }
 
-    public function persistBuilder(HitBuilder $builder): void
+    public function persistBuilder(HitBuilderInterface $hitBuilder): void
     {
         $manager = $this->managerRegistry->getManagerForClass(Hit::class);
         if (null === $manager) {
@@ -30,7 +30,7 @@ final class HitPersister implements HitPersisterInterface
         }
 
         foreach ($this->propertyProvider->getProperties() as $property) {
-            $manager->persist(Hit::createFromHitbuilder($builder, $property));
+            $manager->persist(Hit::createFromHitBuilder($hitBuilder, $property));
         }
 
         $manager->flush();

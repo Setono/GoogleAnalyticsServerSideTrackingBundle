@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class PersistPageViewHitBuilderToDatabaseSubscriber implements EventSubscriberInterface
+final class PersistHitBuildersSubscriber implements EventSubscriberInterface
 {
-    private HitBuilder $pageViewHitBuilder;
+    private HitBuilderStackInterface $hitBuilderStack;
 
     private HitPersisterInterface $hitPersister;
 
-    public function __construct(HitBuilder $pageViewHitBuilder, HitPersisterInterface $hitPersister)
+    public function __construct(HitBuilderStackInterface $hitBuilderStack, HitPersisterInterface $hitPersister)
     {
-        $this->pageViewHitBuilder = $pageViewHitBuilder;
+        $this->hitBuilderStack = $hitBuilderStack;
         $this->hitPersister = $hitPersister;
     }
 
@@ -41,12 +41,16 @@ final class PersistPageViewHitBuilderToDatabaseSubscriber implements EventSubscr
             return;
         }
 
-        $statusCode = $event->getResponse()->getStatusCode();
+        // todo should it be that page view hits are only saved when status code is HTTP 200?
+        // todo but all other hit types should be saved no matter what?
+//        $statusCode = $event->getResponse()->getStatusCode();
+//
+//        if ($statusCode < 200 || $statusCode >= 300) {
+//            return;
+//        }
 
-        if ($statusCode < 200 || $statusCode >= 300) {
-            return;
+        foreach ($this->hitBuilderStack->all() as $hitBuilder) {
+            $this->hitPersister->persistBuilder($hitBuilder);
         }
-
-        $this->hitPersister->persistBuilder($this->pageViewHitBuilder);
     }
 }

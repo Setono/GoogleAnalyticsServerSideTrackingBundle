@@ -33,7 +33,11 @@ final class HitTest extends TestCase
         self::assertSame('key1=value1&key2=value2', $hit->getQuery());
         self::assertSame(HitInterface::STATE_SENT, $hit->getState());
         self::assertTrue($hit->isConsentGranted());
+
         self::assertSame($createdAt->format(\DATE_ATOM), $hit->getCreatedAt()->format(\DATE_ATOM));
-        self::assertSame($updatedAt->format(\DATE_ATOM), $hit->getUpdatedAt()->format(\DATE_ATOM));
+
+        $hitUpdatedAt = $hit->getUpdatedAt();
+        self::assertNotNull($hitUpdatedAt);
+        self::assertSame($updatedAt->format(\DATE_ATOM), $hitUpdatedAt->format(\DATE_ATOM));
     }
 }

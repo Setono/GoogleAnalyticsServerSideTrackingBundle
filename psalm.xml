@@ -7,6 +7,7 @@
 >
     <projectFiles>
         <directory name="src"/>
+        <directory name="tests"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
@@ -14,8 +15,14 @@
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
     <issueHandlers>
-        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info" />
+        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info"/>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <file name="tests/EventListener/PersistHitBuildersSubscriberTest.php"/>
+            </errorLevel>
+        </DeprecatedClass>
     </issueHandlers>
 </psalm>

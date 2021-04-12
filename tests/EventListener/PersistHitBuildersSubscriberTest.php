@@ -6,7 +6,9 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Tests\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
-use Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToDatabaseSubscriber;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistHitBuildersSubscriber;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -19,9 +21,9 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
- * @covers \Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistPageViewHitBuilderToDatabaseSubscriber
+ * @covers \Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistHitBuildersSubscriber
  */
-final class PersistPageViewHitBuilderToDatabaseSubscriberTest extends TestCase
+final class PersistHitBuildersSubscriberTest extends TestCase
 {
     /**
      * @test
@@ -31,7 +33,7 @@ final class PersistPageViewHitBuilderToDatabaseSubscriberTest extends TestCase
         $hitPersister = new class() implements HitPersisterInterface {
             public bool $called = false;
 
-            public function persistBuilder(HitBuilder $builder): void
+            public function persistBuilder(HitBuilderInterface $hitBuilder): void
             {
                 $this->called = true;
             }
@@ -47,7 +49,7 @@ final class PersistPageViewHitBuilderToDatabaseSubscriberTest extends TestCase
 
             public function registerBundles()
             {
-                // TODO: Implement registerBundles() method.
+                return [];
             }
 
             protected function configureRoutes(RouteCollectionBuilder $routes)
@@ -63,7 +65,10 @@ final class PersistPageViewHitBuilderToDatabaseSubscriberTest extends TestCase
 
         $event = new ResponseEvent($kernel, new Request(), HttpKernelInterface::MASTER_REQUEST, new Response());
 
-        $subscriber = new PersistPageViewHitBuilderToDatabaseSubscriber(new HitBuilder(), $hitPersister);
+        $hitBuilderStack = new HitBuilderStack();
+        $hitBuilderStack->push(new HitBuilder(HitBuilderInterface::HIT_TYPE_PAGEVIEW));
+
+        $subscriber = new PersistHitBuildersSubscriber($hitBuilderStack, $hitPersister);
         $subscriber->persist($event);
 
         self::assertTrue($hitPersister->called);

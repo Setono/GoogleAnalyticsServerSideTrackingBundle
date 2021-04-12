@@ -3,11 +3,17 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!-- This alias will autowire the builder interface to the page view builder -->
-        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder"
+        <!-- This alias will autowire the hit builder interface to the page view builder -->
+        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface"
                  alias="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
 
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
-                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder"/>
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder">
+            <factory service="setono_google_analytics_server_side_tracking.factory.hit_builder"
+                     method="createPageViewHitBuilder"/>
+        </service>
+
+        <service id="setono_google_analytics_server_side_tracking.hit.hit_builder_stack"
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack"/>
     </services>
 </container>
