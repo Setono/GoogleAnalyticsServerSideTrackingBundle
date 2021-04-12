@@ -50,7 +50,6 @@ final class PopulatePageViewHitBuilderSubscriber implements EventSubscriberInter
             return;
         }
 
-        $this->pageViewHitBuilder->restore();
         $this->pageViewHitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
         $this->pageViewHitBuilder->setClientId($this->clientIdProvider->get()->toString());
     }

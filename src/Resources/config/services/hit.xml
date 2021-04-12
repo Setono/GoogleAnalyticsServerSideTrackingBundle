@@ -8,11 +8,6 @@
                  alias="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"/>
 
         <service id="setono_google_analytics_server_side_tracking.builder.page_view_hit_builder"
-                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder">
-            <call method="setStorage">
-                <argument type="service" id="setono_google_analytics_server_side_tracking.storage.session"/>
-                <argument>%setono_google_analytics_server_side_tracking.storage_key.page_view%</argument>
-            </call>
-        </service>
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder"/>
     </services>
 </container>
