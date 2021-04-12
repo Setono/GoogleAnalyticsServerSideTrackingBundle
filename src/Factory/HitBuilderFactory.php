@@ -7,22 +7,18 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Factory;
 use Setono\ClientId\Provider\ClientIdProviderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class HitBuilderFactory implements HitBuilderFactoryInterface
 {
-    private HitBuilderStackInterface $hitBuilderStack;
-
     private RequestStack $requestStack;
 
     private ClientIdProviderInterface $clientIdProvider;
 
-    public function __construct(HitBuilderStackInterface $hitBuilderStack, RequestStack $requestStack, ClientIdProviderInterface $clientIdProvider)
+    public function __construct(RequestStack $requestStack, ClientIdProviderInterface $clientIdProvider)
     {
-        $this->hitBuilderStack = $hitBuilderStack;
         $this->requestStack = $requestStack;
         $this->clientIdProvider = $clientIdProvider;
     }
@@ -45,8 +41,6 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
         }
 
         $hitBuilder->setClientId($this->clientIdProvider->get()->toString());
-
-        $this->hitBuilderStack->push($hitBuilder);
 
         return $hitBuilder;
     }
