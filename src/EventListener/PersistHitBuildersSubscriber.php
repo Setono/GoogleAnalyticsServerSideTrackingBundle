@@ -36,7 +36,7 @@ final class PersistHitBuildersSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // todo should it be that page view hits are only saved when status code is HTTP 200?
+        // todo should it be that page view hits are only saved when status code is HTTP 200/404/500?
         // todo but all other hit types should be saved no matter what?
 //        $statusCode = $event->getResponse()->getStatusCode();
 //
