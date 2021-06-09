@@ -8,7 +8,6 @@ use Setono\ClientId\Provider\ClientIdProviderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class HitBuilderFactory implements HitBuilderFactoryInterface
@@ -35,7 +34,7 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
 
     private function populateAndReturn(HitBuilderInterface $hitBuilder): HitBuilderInterface
     {
-        $request = $this->getMasterRequest();
+        $request = $this->requestStack->getMasterRequest();
         if (null !== $request) {
             $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
         }
@@ -43,10 +42,5 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
         $hitBuilder->setClientId($this->clientIdProvider->get()->toString());
 
         return $hitBuilder;
-    }
-
-    private function getMasterRequest(): ?Request
-    {
-        return $this->requestStack->getMasterRequest();
     }
 }
