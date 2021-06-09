@@ -56,6 +56,8 @@ final class SendHitsCommand extends Command
             $bulkIdentifier = uniqid('bulk-', true);
             $this->hitRepository->assignBulkIdentifierToPendingConsented($bulkIdentifier, $this->delay);
 
+            $manager = null;
+
             $hits = $this->hitRepository->findByBulkIdentifier($bulkIdentifier);
             foreach ($hits as $hit) {
                 $workflow = $this->getWorkflow($hit);
@@ -74,6 +76,10 @@ final class SendHitsCommand extends Command
                     $manager = $this->getManager($hit);
                     $manager->flush();
                 }
+            }
+
+            if (null !== $manager) {
+                $manager->clear();
             }
         }
 
