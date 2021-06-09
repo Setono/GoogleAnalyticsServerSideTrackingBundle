@@ -10,6 +10,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+// todo add the hit builder to the hit builder stack immediately?
 final class HitBuilderFactory implements HitBuilderFactoryInterface
 {
     private RequestStack $requestStack;
