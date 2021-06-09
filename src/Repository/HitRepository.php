@@ -7,7 +7,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Repository;
 use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use Safe\DateTime;
+use DateTime;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 use Webmozart\Assert\Assert;
 

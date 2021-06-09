@@ -28,7 +28,6 @@
         "symfony/http-kernel": "^4.4 || ^5.1.5",
         "symfony/uid": "^5.1",
         "symfony/workflow": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
