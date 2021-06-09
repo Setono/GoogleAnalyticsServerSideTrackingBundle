@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+  <file src="src/EventListener/PersistHitBuildersSubscriber.php">
+    <DeprecatedMethod occurrences="1">
+      <code>isMasterRequest</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="src/EventListener/PopulateHitBuildersSubscriber.php">
+    <DeprecatedMethod occurrences="1">
+      <code>isMasterRequest</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="src/Factory/HitBuilderFactory.php">
+    <DeprecatedMethod occurrences="1">
+      <code>getMasterRequest</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="tests/EventListener/PersistHitBuildersSubscriberTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>RouteCollectionBuilder</code>
+    </DeprecatedClass>
+    <DeprecatedConstant occurrences="1">
+      <code>HttpKernelInterface::MASTER_REQUEST</code>
+    </DeprecatedConstant>
+  </file>
+</files>

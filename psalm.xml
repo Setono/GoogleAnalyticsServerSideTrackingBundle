@@ -4,6 +4,7 @@
     totallyTyped="true"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="src"/>
@@ -18,11 +19,10 @@
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
     <issueHandlers>
-        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info"/>
-        <DeprecatedClass>
-            <errorLevel type="suppress">
-                <file name="tests/EventListener/PersistHitBuildersSubscriberTest.php"/>
+        <PluginIssue name="QueryBuilderSetParameter">
+            <errorLevel type="info">
+                <directory name="src/Repository"/>
             </errorLevel>
-        </DeprecatedClass>
+        </PluginIssue>
     </issueHandlers>
 </psalm>

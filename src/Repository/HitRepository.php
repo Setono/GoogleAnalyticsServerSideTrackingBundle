@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Repository;
 
 use DateInterval;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use DateTime;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 use Webmozart\Assert\Assert;
 

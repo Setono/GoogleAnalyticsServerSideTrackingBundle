@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 
-use DateTimeInterface;
 use DateTime;
+use DateTimeInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Symfony\Component\Uid\Uuid;
 
