@@ -21,6 +21,8 @@ class Hit implements HitInterface
 
     protected string $state = self::STATE_PENDING;
 
+    protected ?string $bulkIdentifier = null;
+
     protected DateTimeInterface $createdAt;
 
     protected ?DateTimeInterface $updatedAt = null;

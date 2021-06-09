@@ -9,15 +9,21 @@
             table="setono_google_analytics_server_side_tracking__hit">
         <id name="id" type="string"/>
         <field name="clientId" type="string"/>
-        <field name="consentGranted" type="boolean"/>
+        <field name="consentGranted" column="consent_granted" type="boolean"/>
         <field name="query" type="text"/>
-        <field name="state" type="string"/>
+        <field name="state" column="state" type="string"/>
+        <field name="bulkIdentifier" column="bulk_identifier" type="string" nullable="true"/>
 
-        <field name="createdAt" type="datetime">
+        <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
         <field name="updatedAt" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <indexes>
+            <index columns="bulk_identifier"/>
+            <index columns="consent_granted,state,created_at"/>
+        </indexes>
     </entity>
 </doctrine-mapping>
