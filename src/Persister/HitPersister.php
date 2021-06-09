@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Persister;
 
 use Doctrine\Persistence\ManagerRegistry;
-use function Safe\sprintf;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\PropertyProviderInterface;
