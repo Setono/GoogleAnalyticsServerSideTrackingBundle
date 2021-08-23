@@ -40,7 +40,7 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
             $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
         }
 
-        $hitBuilder->setClientId($this->clientIdProvider->get()->toString());
+        $hitBuilder->setClientId($this->clientIdProvider->getClientId()->toString());
 
         return $hitBuilder;
     }

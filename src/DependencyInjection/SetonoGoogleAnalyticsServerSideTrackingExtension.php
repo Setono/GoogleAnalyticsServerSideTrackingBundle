@@ -15,7 +15,11 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        /** @psalm-suppress PossiblyNullArgument */
+        /**
+         * @psalm-suppress PossiblyNullArgument
+         *
+         * @var array{properties: array, send_delay: int} $config
+         */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
