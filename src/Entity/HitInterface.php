@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 
 use DateTimeInterface;
+use Setono\ClientId\ClientId;
 
 interface HitInterface
 {
@@ -16,9 +17,9 @@ interface HitInterface
 
     public function getId(): string;
 
-    public function getClientId(): ?string;
+    public function getClientId(): ?ClientId;
 
-    public function setClientId(?string $clientId): void;
+    public function setClientId(?ClientId $clientId): void;
 
     public function isConsentGranted(): bool;
 

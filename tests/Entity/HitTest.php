@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
+use Setono\ClientId\ClientId;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 
@@ -22,14 +23,14 @@ final class HitTest extends TestCase
         self::assertFalse($hit->isConsentGranted());
         self::assertSame(HitInterface::STATE_PENDING, $hit->getState());
 
-        $hit->setClientId('client_id');
+        $hit->setClientId(new ClientId('client_id'));
         $hit->setQuery('key1=value1&key2=value2');
         $hit->setConsentGranted(true);
         $hit->setState(HitInterface::STATE_SENT);
         $hit->setCreatedAt($createdAt);
         $hit->setUpdatedAt($updatedAt);
 
-        self::assertSame('client_id', $hit->getClientId());
+        self::assertSame('client_id', (string) $hit->getClientId());
         self::assertSame('key1=value1&key2=value2', $hit->getQuery());
         self::assertSame(HitInterface::STATE_SENT, $hit->getState());
         self::assertTrue($hit->isConsentGranted());
