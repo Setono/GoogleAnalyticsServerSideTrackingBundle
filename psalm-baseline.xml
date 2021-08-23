@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+<files psalm-version="4.9.3@4c262932602b9bbab5020863d1eb22d49de0dbf4">
   <file src="src/EventListener/PersistHitBuildersSubscriber.php">
     <DeprecatedMethod occurrences="1">
       <code>isMasterRequest</code>
     </DeprecatedMethod>
+    <MixedArgument occurrences="1">
+      <code>$hitBuilder</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$hitBuilder</code>
+    </MixedAssignment>
   </file>
   <file src="src/EventListener/PopulateHitBuildersSubscriber.php">
     <DeprecatedMethod occurrences="1">
       <code>isMasterRequest</code>
     </DeprecatedMethod>
+    <MixedAssignment occurrences="1">
+      <code>$hitBuilder</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>populateFromResponse</code>
+    </MixedMethodCall>
   </file>
   <file src="src/Factory/HitBuilderFactory.php">
     <DeprecatedMethod occurrences="1">
