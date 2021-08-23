@@ -16,6 +16,7 @@ final class HitPersister implements HitPersisterInterface
     use ORMManagerTrait;
 
     private PropertyProviderInterface $propertyProvider;
+
     private ConsentContextInterface $consentContext;
 
     public function __construct(
