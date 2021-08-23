@@ -55,6 +55,7 @@
             "gedmo/doctrine-extensions",
             "nyholm/psr7",
             "setono/client-id-bundle",
+            "setono/consent-bundle",
             "symfony/http-client"
         ]
     },
