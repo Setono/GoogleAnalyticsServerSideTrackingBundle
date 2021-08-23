@@ -6,7 +6,9 @@
         <service id="setono_google_analytics_server_side_tracking.persister.hit"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersister">
             <argument type="service" id="doctrine"/>
-            <argument type="service" id="setono_google_analytics_server_side_tracking.provider.default_property_provider"/>
+            <argument type="service"
+                      id="setono_google_analytics_server_side_tracking.provider.default_property_provider"/>
+            <argument type="service" id="setono_consent.context.default"/>
         </service>
     </services>
 </container>
