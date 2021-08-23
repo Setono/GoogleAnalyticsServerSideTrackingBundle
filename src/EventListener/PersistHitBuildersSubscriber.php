@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -36,15 +37,22 @@ final class PersistHitBuildersSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // todo should it be that page view hits are only saved when status code is HTTP 200/404/500?
-        // todo but all other hit types should be saved no matter what?
-//        $statusCode = $event->getResponse()->getStatusCode();
-//
-//        if ($statusCode < 200 || $statusCode >= 300) {
-//            return;
-//        }
+        foreach ($this->hitBuilderStack->all(static fn (HitBuilderInterface $hitBuilder) => $hitBuilder->getHitType() !== HitBuilderInterface::HIT_TYPE_PAGEVIEW) as $hitBuilder) {
+            $this->hitPersister->persistBuilder($hitBuilder);
+        }
 
-        foreach ($this->hitBuilderStack->all() as $hitBuilder) {
+        /**
+         * Here we try to mimic how the client side Google Analytics implementation would track page views
+         * We track them on 2xx, 4xx, and 5xx HTTP status code
+         */
+        $statusCode = $event->getResponse()->getStatusCode();
+        $significantStatusCode = (int) ($statusCode / 100);
+
+        if (!in_array($significantStatusCode, [2, 4, 5], true)) {
+            return;
+        }
+
+        foreach ($this->hitBuilderStack->pageviews() as $hitBuilder) {
             $this->hitPersister->persistBuilder($hitBuilder);
         }
     }
