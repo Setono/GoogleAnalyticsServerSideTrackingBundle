@@ -13,7 +13,7 @@
         "php": ">=7.4",
         "doctrine/doctrine-bundle": "^1.12 || ^2.2",
         "doctrine/orm": "^2.7",
-        "doctrine/persistence": "^1.3",
+        "doctrine/persistence": "^1.3 || ^2.2",
         "gedmo/doctrine-extensions": "^2.4",
         "nyholm/psr7": "^1.3",
         "setono/client-id-bundle": "^0.2",
