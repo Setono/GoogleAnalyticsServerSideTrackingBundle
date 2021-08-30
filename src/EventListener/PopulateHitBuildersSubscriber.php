@@ -22,7 +22,7 @@ final class PopulateHitBuildersSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::RESPONSE => ['populateFromResponse', 128],
+            KernelEvents::RESPONSE => ['populateFromResponse', -900],
         ];
     }
 
