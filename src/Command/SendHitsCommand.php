@@ -6,6 +6,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Command;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Setono\DoctrineObjectManagerTrait\ORM\ORMManagerTrait;
 use Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Repository\HitRepositoryInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Workflow\SendHitWorkflow;
@@ -18,6 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class SendHitsCommand extends Command
 {
+    use ORMManagerTrait;
+
     protected static $defaultName = 'setono:google-analytics:send-hits';
 
     private ?WorkflowInterface $workflow = null;
@@ -29,8 +32,6 @@ final class SendHitsCommand extends Command
     private HitRepositoryInterface $hitRepository;
 
     private Registry $workflowRegistry;
-
-    private ManagerRegistry $managerRegistry;
 
     private int $delay;
 
@@ -95,17 +96,5 @@ final class SendHitsCommand extends Command
         }
 
         return $this->workflow;
-    }
-
-    private function getManager(object $obj): ObjectManager
-    {
-        if (null === $this->manager) {
-            $manager = $this->managerRegistry->getManagerForClass(get_class($obj));
-            Assert::notNull($manager);
-
-            $this->manager = $manager;
-        }
-
-        return $this->manager;
     }
 }
