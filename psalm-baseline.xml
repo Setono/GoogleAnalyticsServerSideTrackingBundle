@@ -4,12 +4,6 @@
     <DeprecatedMethod occurrences="1">
       <code>isMasterRequest</code>
     </DeprecatedMethod>
-    <MixedArgument occurrences="1">
-      <code>$hitBuilder</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$hitBuilder</code>
-    </MixedAssignment>
   </file>
   <file src="src/EventListener/PopulateHitBuildersSubscriber.php">
     <DeprecatedMethod occurrences="1">
