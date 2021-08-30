@@ -7,20 +7,26 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Factory;
 use Setono\ClientId\Provider\ClientIdProviderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-// todo add the hit builder to the hit builder stack immediately?
 final class HitBuilderFactory implements HitBuilderFactoryInterface
 {
     private RequestStack $requestStack;
 
     private ClientIdProviderInterface $clientIdProvider;
 
-    public function __construct(RequestStack $requestStack, ClientIdProviderInterface $clientIdProvider)
-    {
+    private HitBuilderStackInterface $hitBuilderStack;
+
+    public function __construct(
+        RequestStack $requestStack,
+        ClientIdProviderInterface $clientIdProvider,
+        HitBuilderStackInterface $hitBuilderStack
+    ) {
         $this->requestStack = $requestStack;
         $this->clientIdProvider = $clientIdProvider;
+        $this->hitBuilderStack = $hitBuilderStack;
     }
 
     public function createPageViewHitBuilder(): HitBuilderInterface
@@ -35,6 +41,8 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
 
     private function populateAndReturn(HitBuilderInterface $hitBuilder): HitBuilderInterface
     {
+        $this->hitBuilderStack->push($hitBuilder);
+
         $request = $this->requestStack->getMasterRequest();
         if (null !== $request) {
             $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));

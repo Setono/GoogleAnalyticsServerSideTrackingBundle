@@ -14,10 +14,6 @@
         </service>
 
         <service id="setono_google_analytics_server_side_tracking.hit.hit_builder_stack"
-                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack">
-            <call method="push">
-                <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
-            </call>
-        </service>
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack"/>
     </services>
 </container>
