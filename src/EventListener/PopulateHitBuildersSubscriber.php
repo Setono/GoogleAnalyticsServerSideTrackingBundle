@@ -21,9 +21,8 @@ final class PopulateHitBuildersSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        // todo test these priorities in phpunit if possible (maybe the TagBagBundle does this?)
         return [
-            KernelEvents::RESPONSE => ['populateFromResponse', 90],
+            KernelEvents::RESPONSE => ['populateFromResponse', 128],
         ];
     }
 

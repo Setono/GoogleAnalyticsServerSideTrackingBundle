@@ -25,7 +25,6 @@ final class PersistHitBuildersSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        // todo validate priorities
         return [
             KernelEvents::RESPONSE => ['persist', -1000],
         ];
