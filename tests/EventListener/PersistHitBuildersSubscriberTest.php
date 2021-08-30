@@ -54,12 +54,10 @@ final class PersistHitBuildersSubscriberTest extends TestCase
 
             protected function configureRoutes(RouteCollectionBuilder $routes)
             {
-                // TODO: Implement configureRoutes() method.
             }
 
             protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
             {
-                // TODO: Implement configureContainer() method.
             }
         };
 
