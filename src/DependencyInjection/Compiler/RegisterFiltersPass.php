@@ -12,7 +12,7 @@ final class RegisterFiltersPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if ($container->has('setono_google_analytics_server_side_tracking.filter.composite')) {
+        if (!$container->has('setono_google_analytics_server_side_tracking.filter.composite')) {
             return;
         }
 
