@@ -39,7 +39,7 @@
         "nyholm/symfony-bundle-test": "^1.7",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.0",
-        "psalm/plugin-symfony": "^2.1",
+        "psalm/plugin-symfony": "^3.0",
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.1.2",
         "symfony/security-bundle": "^4.4 || ^5.0",
