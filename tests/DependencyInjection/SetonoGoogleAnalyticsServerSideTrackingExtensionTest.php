@@ -24,6 +24,8 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtensionTest extends Abstrac
      */
     public function it_can_load(): void
     {
+        $this->setParameter('kernel.debug', true);
+
         $this->load();
 
         self::assertTrue(true);

@@ -9,6 +9,7 @@
             <argument type="service"
                       id="setono_google_analytics_server_side_tracking.provider.default_property_provider"/>
             <argument type="service" id="setono_consent.context.default"/>
+            <argument type="service" id="setono_google_analytics_server_side_tracking.filter.composite"/>
         </service>
     </services>
 </container>

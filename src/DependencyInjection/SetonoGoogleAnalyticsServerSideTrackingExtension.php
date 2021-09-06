@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\DependencyInjection;
 
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Filter\FilterInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Workflow\SendHitWorkflow;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,8 +26,17 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
         $container->setParameter('setono_google_analytics_server_side_tracking.send_delay', $config['send_delay']);
 
+        $container
+            ->registerForAutoconfiguration(FilterInterface::class)
+            ->addTag('setono_google_analytics_server_side_tracking.filter')
+        ;
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+
+        if (true === $container->getParameter('kernel.debug')) {
+            $loader->load('services/debug/filter.xml');
+        }
     }
 
     public function prepend(ContainerBuilder $container): void
