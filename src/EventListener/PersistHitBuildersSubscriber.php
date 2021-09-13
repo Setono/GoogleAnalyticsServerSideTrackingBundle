@@ -42,7 +42,7 @@ final class PersistHitBuildersSubscriber implements EventSubscriberInterface
 
         /**
          * Here we try to mimic how the client side Google Analytics implementation would track page views
-         * We track them on 2xx, 4xx, and 5xx HTTP status code
+         * We track them on 2xx, 4xx, and 5xx HTTP status codes
          */
         $statusCode = $event->getResponse()->getStatusCode();
         $significantStatusCode = (int) ($statusCode / 100);
