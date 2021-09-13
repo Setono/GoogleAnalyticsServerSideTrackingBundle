@@ -9,7 +9,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 interface FilterInterface
 {
     /**
-     * If the filter returns false, the given $hitBuilder should be filtered
+     * If the filter returns false, the given $hitBuilder will not be persisted in the database
      */
     public function filter(HitBuilderInterface $hitBuilder): bool;
 }
