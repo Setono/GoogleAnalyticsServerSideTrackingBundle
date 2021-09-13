@@ -8,7 +8,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * This filter is only enabled when debug is enabled. It will filter requests made to the Symfony profiler
+ * This filter is only enabled when debug is enabled. It will exclude requests made to the Symfony profiler
  */
 final class ProfilerFilter implements FilterInterface
 {
