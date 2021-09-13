@@ -126,7 +126,7 @@ No matter the interval in the cronjob, hits will never be sent before the `send_
 **How are hit builders persisted?**
 
 When creating a hit builder using the hit builder factory, the factory will add the hit builder to the so-called
-hit builder stack. A response listener is this persisting the hit builders at the end of the request-response lifecycle.
+hit builder stack. A response listener is then persisting the hit builders at the end of the request-response lifecycle.
 The same logic as the client side library is applied. This means that page views are persisted when the HTTP status code
 is one of `2xx`, `4xx`, or `5xx`. All events are persisted no matter what, though. You can see this logic [here](src/EventListener/PersistHitBuildersSubscriber.php).
 
