@@ -34,7 +34,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        if (true === $container->getParameter('kernel.debug')) {
+        if ($container->getParameter('kernel.debug') === true) {
             $loader->load('services/debug/filter.xml');
         }
     }
