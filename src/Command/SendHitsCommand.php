@@ -68,7 +68,12 @@ final class SendHitsCommand extends Command
                         continue;
                     }
 
-                    $this->client->sendHit((string) $hit->getQuery());
+                    $payload = $hit->getHit();
+                    if (null === $payload) {
+                        continue;
+                    }
+
+                    $this->client->sendHit($payload->getPayload());
 
                     $workflow->apply($hit, SendHitWorkflow::TRANSITION_SEND);
                 } catch (\Throwable $e) {

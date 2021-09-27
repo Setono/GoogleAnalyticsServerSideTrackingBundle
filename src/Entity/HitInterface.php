@@ -6,6 +6,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 
 use DateTimeInterface;
 use Setono\ClientId\ClientId;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\Hit as BaseHit;
 
 interface HitInterface
 {
@@ -25,9 +26,9 @@ interface HitInterface
 
     public function setConsentGranted(bool $consentGranted): void;
 
-    public function getQuery(): ?string;
+    public function getHit(): ?BaseHit;
 
-    public function setQuery(string $query): void;
+    public function setHit(?BaseHit $hit): void;
 
     public function getState(): string;
 

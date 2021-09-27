@@ -7,6 +7,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Entity;
 use DateTime;
 use DateTimeInterface;
 use Setono\ClientId\ClientId;
+use Setono\GoogleAnalyticsMeasurementProtocol\Hit\Hit as BaseHit;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Symfony\Component\Uid\Uuid;
 
@@ -18,7 +19,7 @@ class Hit implements HitInterface
 
     protected bool $consentGranted = false;
 
-    protected ?string $query = null;
+    protected ?BaseHit $hit = null;
 
     protected string $state = self::STATE_PENDING;
 
@@ -38,7 +39,7 @@ class Hit implements HitInterface
     {
         $obj = new self();
         $obj->setClientId(new ClientId((string) $hitBuilder->getClientId()));
-        $obj->setQuery($hitBuilder->getHit($property)->getPayload());
+        $obj->setHit($hitBuilder->getHit($property));
 
         return $obj;
     }
@@ -68,14 +69,14 @@ class Hit implements HitInterface
         $this->consentGranted = $consentGranted;
     }
 
-    public function getQuery(): ?string
+    public function getHit(): ?BaseHit
     {
-        return $this->query;
+        return $this->hit;
     }
 
-    public function setQuery(string $query): void
+    public function setHit(?BaseHit $hit): void
     {
-        $this->query = $query;
+        $this->hit = $hit;
     }
 
     public function getState(): string
