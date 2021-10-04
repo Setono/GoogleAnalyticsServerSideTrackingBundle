@@ -12,5 +12,6 @@
         <import resource="services/persister.xml"/>
         <import resource="services/provider.xml"/>
         <import resource="services/repository.xml"/>
+        <import resource="services/request.xml"/>
     </imports>
 </container>

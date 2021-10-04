@@ -9,6 +9,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilder;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
+use Setono\GoogleAnalyticsMeasurementProtocol\Request\LanguageResolverInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class HitBuilderFactory implements HitBuilderFactoryInterface
@@ -19,14 +20,18 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
 
     private HitBuilderStackInterface $hitBuilderStack;
 
+    private LanguageResolverInterface $languageResolver;
+
     public function __construct(
         RequestStack $requestStack,
         ClientIdProviderInterface $clientIdProvider,
-        HitBuilderStackInterface $hitBuilderStack
+        HitBuilderStackInterface $hitBuilderStack,
+        LanguageResolverInterface $languageResolver
     ) {
         $this->requestStack = $requestStack;
         $this->clientIdProvider = $clientIdProvider;
         $this->hitBuilderStack = $hitBuilderStack;
+        $this->languageResolver = $languageResolver;
     }
 
     public function createPageViewHitBuilder(): HitBuilderInterface
@@ -45,7 +50,7 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
 
         $request = $this->requestStack->getMasterRequest();
         if (null !== $request) {
-            $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request));
+            $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request, $this->languageResolver));
         }
 
         $hitBuilder->setClientId($this->clientIdProvider->getClientId()->toString());

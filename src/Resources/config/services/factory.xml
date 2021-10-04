@@ -8,6 +8,7 @@
             <argument type="service" id="request_stack"/>
             <argument type="service" id="setono_client_id.provider.default_client_id"/>
             <argument type="service" id="setono_google_analytics_server_side_tracking.hit.hit_builder_stack"/>
+            <argument type="service" id="setono_google_analytics_measurement_protocol.request.language_resolver"/>
         </service>
     </services>
 </container>
