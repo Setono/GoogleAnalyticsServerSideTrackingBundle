@@ -23,7 +23,7 @@
         "setono/consent-bundle": "^0.1",
         "setono/consent-contracts": "^0.1",
         "setono/doctrine-object-manager-trait": "^1.0",
-        "setono/google-analytics-measurement-protocol": "^0.2",
+        "setono/google-analytics-measurement-protocol": "^0.3",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/console": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
