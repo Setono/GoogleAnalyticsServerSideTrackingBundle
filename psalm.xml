@@ -24,5 +24,10 @@
                 <directory name="src/Repository"/>
             </errorLevel>
         </PluginIssue>
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getMasterRequest"/>
+            </errorLevel>
+        </DeprecatedMethod>
     </issueHandlers>
 </psalm>
