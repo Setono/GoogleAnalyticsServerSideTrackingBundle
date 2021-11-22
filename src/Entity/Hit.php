@@ -49,7 +49,7 @@ class Hit implements HitInterface
         $obj = new self();
         $obj->setQuery($command->getQuery());
         $obj->setClientId(new ClientId($command->getClientId()));
-        $obj->setConsentGranted($command->getConsent()->isMarketingConsentGranted());
+        $obj->setConsentGranted($command->getConsent()->isStatisticsConsentGranted());
 
         return $obj;
     }

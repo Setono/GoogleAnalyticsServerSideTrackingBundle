@@ -8,6 +8,8 @@ use DateInterval;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Setono\ClientId\ClientId;
+use Setono\Consent\Consent;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 use Webmozart\Assert\Assert;
 
@@ -66,6 +68,19 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
         Assert::allIsInstanceOf($result, HitInterface::class);
 
         return $result;
+    }
+
+    public function updateConsentOnClientId(ClientId $clientId, Consent $consent): void
+    {
+        $this->createQueryBuilder('o')
+            ->update()
+            ->andWhere('o.clientId = :clientId')
+            ->set('o.consentGranted', ':consentGranted')
+            ->setParameter('clientId', $clientId)
+            ->setParameter('consentGranted', $consent->isStatisticsConsentGranted())
+            ->getQuery()
+            ->execute()
+        ;
     }
 
     private static function applyDelay(QueryBuilder $qb, int $delay): void
