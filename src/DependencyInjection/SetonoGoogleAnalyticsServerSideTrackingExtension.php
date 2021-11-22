@@ -46,7 +46,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
             'messenger' => [
                 'buses' => [
                     'setono_google_analytics_server_side_tracking.command_bus' => null,
-                ]
+                ],
             ],
         ]);
     }
