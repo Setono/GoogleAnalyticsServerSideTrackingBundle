@@ -8,6 +8,7 @@ use DateTime;
 use DateTimeInterface;
 use Setono\ClientId\ClientId;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Message\Command\PersistHit;
 use Symfony\Component\Uid\Uuid;
 
 class Hit implements HitInterface
@@ -39,6 +40,16 @@ class Hit implements HitInterface
         $obj = new self();
         $obj->setClientId(new ClientId((string) $hitBuilder->getClientId()));
         $obj->setQuery($hitBuilder->getHit($property)->getPayload());
+
+        return $obj;
+    }
+
+    public static function createFromCommand(PersistHit $command): self
+    {
+        $obj = new self();
+        $obj->setQuery($command->getQuery());
+        $obj->setClientId(new ClientId($command->getClientId()));
+        $obj->setConsentGranted($command->getConsent()->isMarketingConsentGranted());
 
         return $obj;
     }

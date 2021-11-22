@@ -39,6 +39,7 @@ final class PersistHitBuildersSubscriberTest extends TestCase
             }
         };
 
+        /** @psalm-suppress PropertyNotSetInConstructor */
         $kernel = new class() extends Kernel {
             use MicroKernelTrait;
 

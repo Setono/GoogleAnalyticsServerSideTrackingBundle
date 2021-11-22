@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Persister;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Setono\Consent\Context\ConsentContextInterface;
-use Setono\DoctrineObjectManagerTrait\ORM\ORMManagerTrait;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
-use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Filter\FilterInterface;
+use Setono\GoogleAnalyticsServerSideTrackingBundle\Message\Command\PersistHit;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Provider\PropertyProviderInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class HitPersister implements HitPersisterInterface
 {
-    use ORMManagerTrait;
+    private MessageBusInterface $messageBus;
 
     private PropertyProviderInterface $propertyProvider;
 
@@ -23,12 +22,12 @@ final class HitPersister implements HitPersisterInterface
     private FilterInterface $filter;
 
     public function __construct(
-        ManagerRegistry $managerRegistry,
+        MessageBusInterface $messageBus,
         PropertyProviderInterface $propertyProvider,
         ConsentContextInterface $consentContext,
         FilterInterface $filter
     ) {
-        $this->managerRegistry = $managerRegistry;
+        $this->messageBus = $messageBus;
         $this->propertyProvider = $propertyProvider;
         $this->consentContext = $consentContext;
         $this->filter = $filter;
@@ -40,14 +39,12 @@ final class HitPersister implements HitPersisterInterface
             return;
         }
 
-        $manager = $this->getManager(Hit::class);
-
         foreach ($this->propertyProvider->getProperties() as $property) {
-            $hit = Hit::createFromHitBuilder($hitBuilder, $property);
-            $hit->setConsentGranted($this->consentContext->getConsent()->isStatisticsConsentGranted());
-            $manager->persist($hit);
-        }
+            $hit = $hitBuilder->getHit($property);
 
-        $manager->flush();
+            $this->messageBus->dispatch(
+                new PersistHit($hit->getPayload(), $hit->getClientId(), $this->consentContext->getConsent())
+            );
+        }
     }
 }

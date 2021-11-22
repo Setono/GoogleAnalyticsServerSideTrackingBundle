@@ -9,6 +9,7 @@
         <import resource="services/factory.xml"/>
         <import resource="services/filter.xml"/>
         <import resource="services/hit.xml"/>
+        <import resource="services/message.xml"/>
         <import resource="services/persister.xml"/>
         <import resource="services/provider.xml"/>
         <import resource="services/repository.xml"/>
