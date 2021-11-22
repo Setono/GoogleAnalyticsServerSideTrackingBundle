@@ -6,6 +6,8 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\Persistence\ObjectRepository;
+use Setono\ClientId\ClientId;
+use Setono\Consent\Consent;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\HitInterface;
 
 interface HitRepositoryInterface extends ObjectRepository, ServiceEntityRepositoryInterface
@@ -29,4 +31,9 @@ interface HitRepositoryInterface extends ObjectRepository, ServiceEntityReposito
      * @return array<array-key, HitInterface>
      */
     public function findByBulkIdentifier(string $bulkIdentifier): array;
+
+    /**
+     * This method will update the consent on the given client id
+     */
+    public function updateConsentOnClientId(ClientId $clientId, Consent $consent): void;
 }
