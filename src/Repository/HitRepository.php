@@ -73,6 +73,7 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
     public function updateConsentOnClientId(ClientId $clientId, Consent $consent): void
     {
         $this->createQueryBuilder('o')
+            ->update()
             ->andWhere('o.clientId = :clientId')
             ->set('o.consentGranted', ':consentGranted')
             ->setParameter('clientId', $clientId)
