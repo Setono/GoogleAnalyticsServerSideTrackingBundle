@@ -45,7 +45,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
             'workflows' => SendHitWorkflow::getConfig(),
             'messenger' => [
                 'buses' => [
-                    'setono_google_analytics_server_side_tracking.command_bus'
+                    'setono_google_analytics_server_side_tracking.command_bus' => null,
                 ]
             ],
         ]);
