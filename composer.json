@@ -1,8 +1,8 @@
 {
     "name": "setono/google-analytics-server-side-tracking-bundle",
-    "type": "symfony-bundle",
     "description": "A Symfony bundle that allows you to track your visitors server side instead of client side",
     "license": "MIT",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Joachim Løvgaard",
@@ -48,6 +48,17 @@
         "symfony/security-bundle": "^4.4 || ^5.0",
         "weirdan/doctrine-psalm-plugin": "^1.0"
     },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "sort-packages": true
     },
@@ -63,17 +74,6 @@
             "symfony/http-client"
         ]
     },
-    "autoload": {
-        "psr-4": {
-            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Setono\\GoogleAnalyticsServerSideTrackingBundle\\Tests\\": "tests/"
-        }
-    },
-    "prefer-stable": true,
     "scripts": {
         "analyse": "psalm --threads=8",
         "check-style": "ecs check",
