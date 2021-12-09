@@ -19,12 +19,13 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{properties: array, send_delay: int} $config
+         * @var array{properties: array, send_delay: int, prune_delay: int} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
         $container->setParameter('setono_google_analytics_server_side_tracking.send_delay', $config['send_delay']);
+        $container->setParameter('setono_google_analytics_server_side_tracking.prune_delay', $config['prune_delay']);
 
         $container
             ->registerForAutoconfiguration(FilterInterface::class)
