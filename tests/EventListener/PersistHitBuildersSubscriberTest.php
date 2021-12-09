@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 /**
  * @covers \Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener\PersistHitBuildersSubscriber
@@ -53,11 +53,11 @@ final class PersistHitBuildersSubscriberTest extends TestCase
                 return [];
             }
 
-            protected function configureRoutes(RouteCollectionBuilder $routes)
+            protected function configureRoutes(RoutingConfigurator $routingConfigurator): void
             {
             }
 
-            protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
+            protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
             {
             }
         };

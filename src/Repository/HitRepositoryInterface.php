@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Repository;
 
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\Persistence\ObjectRepository;
 use Setono\ClientId\ClientId;
@@ -36,4 +37,9 @@ interface HitRepositoryInterface extends ObjectRepository, ServiceEntityReposito
      * This method will update the consent on the given client id
      */
     public function updateConsentOnClientId(ClientId $clientId, Consent $consent): void;
+
+    /**
+     * This will remove sent hits from the hits table that are older than $olderThan
+     */
+    public function prune(DateTimeInterface $olderThan): void;
 }

@@ -6,6 +6,7 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Repository;
 
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Setono\ClientId\ClientId;
@@ -78,6 +79,19 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
             ->set('o.consentGranted', ':consentGranted')
             ->setParameter('clientId', $clientId)
             ->setParameter('consentGranted', $consent->isStatisticsConsentGranted())
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    public function prune(DateTimeInterface $olderThan): void
+    {
+        $this->createQueryBuilder('o')
+            ->delete()
+            ->andWhere('o.createdAt < :olderThan')
+            ->andWhere('o.state = :state')
+            ->setParameter('olderThan', $olderThan)
+            ->setParameter('state', HitInterface::STATE_SENT)
             ->getQuery()
             ->execute()
         ;

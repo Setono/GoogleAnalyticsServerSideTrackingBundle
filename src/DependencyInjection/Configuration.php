@@ -32,6 +32,11 @@ final class Configuration implements ConfigurationInterface
                     ->info('The number of seconds to wait until a hit is sent to Google Analytics')
                     ->example(120) // 2 minutes
                 ->end()
+                ->integerNode('prune_delay')
+                    ->defaultValue(30)
+                    ->info('The number of minutes to wait before sent hits are removed from the hits table')
+                    ->example(5)
+                ->end()
             ->end()
         ;
 

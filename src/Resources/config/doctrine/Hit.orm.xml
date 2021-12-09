@@ -8,7 +8,7 @@
     <entity name="Setono\GoogleAnalyticsServerSideTrackingBundle\Entity\Hit"
             table="setono_google_analytics_server_side_tracking__hit">
         <id name="id" type="string"/>
-        <field name="clientId" type="client_id"/>
+        <field name="clientId" column="client_id" type="client_id"/>
         <field name="consentGranted" column="consent_granted" type="boolean"/>
         <field name="query" type="text"/>
         <field name="state" column="state" type="string"/>
@@ -23,6 +23,7 @@
 
         <indexes>
             <index columns="bulk_identifier"/>
+            <index columns="client_id"/>
             <index columns="consent_granted,state,created_at"/>
         </indexes>
     </entity>
