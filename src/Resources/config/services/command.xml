@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_google_analytics_server_side_tracking.command.prune"
-                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Command\PruneCommand">
+                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Command\PruneHitsCommand">
             <argument type="service" id="setono_google_analytics_server_side_tracking.repository.hit"/>
             <argument>%setono_google_analytics_server_side_tracking.prune_delay%</argument>
 
