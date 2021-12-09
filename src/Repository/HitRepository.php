@@ -89,9 +89,7 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
         $this->createQueryBuilder('o')
             ->delete()
             ->andWhere('o.createdAt < :olderThan')
-            ->andWhere('o.state = :state')
             ->setParameter('olderThan', $olderThan)
-            ->setParameter('state', HitInterface::STATE_SENT)
             ->getQuery()
             ->execute()
         ;

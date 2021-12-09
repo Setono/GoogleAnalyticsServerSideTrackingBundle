@@ -33,8 +33,8 @@ final class Configuration implements ConfigurationInterface
                     ->example(120) // 2 minutes
                 ->end()
                 ->integerNode('prune_delay')
-                    ->defaultValue(30)
-                    ->info('The number of minutes to wait before sent hits are removed from the hits table')
+                    ->defaultValue(1440) // 24 hours
+                    ->info('The number of minutes to wait before hits are removed from the hits table')
                     ->example(5)
                 ->end()
             ->end()

@@ -39,7 +39,7 @@ interface HitRepositoryInterface extends ObjectRepository, ServiceEntityReposito
     public function updateConsentOnClientId(ClientId $clientId, Consent $consent): void;
 
     /**
-     * This will remove sent hits from the hits table that are older than $olderThan
+     * This will remove hits from the hits table that are older than $olderThan
      */
     public function prune(DateTimeInterface $olderThan): void;
 }
