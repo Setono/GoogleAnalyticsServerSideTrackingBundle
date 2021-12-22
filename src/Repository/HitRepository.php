@@ -44,6 +44,7 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
             ->setParameter('bulkIdentifier', $bulkIdentifier)
             ->andWhere('o.consentGranted = true')
             ->andWhere('o.state = :state')
+            ->andWhere('o.bulkIdentifier is null')
             ->setParameter('state', HitInterface::STATE_PENDING)
             ->setMaxResults($limit)
         ;
