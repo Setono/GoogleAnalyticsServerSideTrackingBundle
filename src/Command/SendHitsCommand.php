@@ -11,6 +11,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Repository\HitRepositoryInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Workflow\SendHitWorkflow;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Workflow\Registry;
@@ -19,6 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class SendHitsCommand extends Command
 {
+    use LockableTrait;
+
     use ORMManagerTrait;
 
     protected static $defaultName = 'setono:google-analytics:send-hits';
@@ -53,6 +56,12 @@ final class SendHitsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if (!$this->lock()) {
+            $output->writeln('The command is already running in another process.');
+
+            return 0;
+        }
+
         while ($this->hitRepository->hasConsentedPending($this->delay)) {
             $bulkIdentifier = uniqid('bulk-', true);
             $this->hitRepository->assignBulkIdentifierToPendingConsented($bulkIdentifier, $this->delay);
@@ -83,6 +92,8 @@ final class SendHitsCommand extends Command
                 $manager->clear();
             }
         }
+
+        $this->release();
 
         return 0;
     }
