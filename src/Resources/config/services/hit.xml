@@ -14,6 +14,15 @@
         </service>
 
         <service id="setono_google_analytics_server_side_tracking.hit.hit_builder_stack"
-                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack"/>
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStack">
+            <!--
+                The page_view_hit_builder is already pushed onto the stack when it's created, but we do this so that
+                when the container is compiled the page_view_hit_builder is not removed from the container because
+                it is unused in the application
+             -->
+            <call method="push">
+                <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
+            </call>
+        </service>
     </services>
 </container>
