@@ -32,7 +32,7 @@ final class PopulateHitBuildersSubscriber implements EventSubscriberInterface
             return;
         }
 
-        foreach ($this->hitBuilderStack as $hitBuilder) {
+        foreach ($this->hitBuilderStack->all() as $hitBuilder) {
             $hitBuilder->populateFromResponse(new SymfonyResponseAdapter($event->getResponse()));
         }
     }

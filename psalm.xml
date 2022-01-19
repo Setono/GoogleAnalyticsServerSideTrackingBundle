@@ -4,7 +4,6 @@
     totallyTyped="true"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="src"/>
@@ -24,9 +23,15 @@
                 <directory name="src/Repository"/>
             </errorLevel>
         </PluginIssue>
+        <DeprecatedConstant>
+            <errorLevel type="suppress">
+                <file name="tests/EventListener/PersistHitBuildersSubscriberTest.php"/>
+            </errorLevel>
+        </DeprecatedConstant>
         <DeprecatedMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getMasterRequest"/>
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest"/>
             </errorLevel>
         </DeprecatedMethod>
     </issueHandlers>
