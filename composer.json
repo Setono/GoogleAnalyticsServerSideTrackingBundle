@@ -67,18 +67,6 @@
         },
         "sort-packages": true
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
-        "unused": [
-            "gedmo/doctrine-extensions",
-            "nyholm/psr7",
-            "setono/client-id-bundle",
-            "setono/consent-bundle",
-            "symfony/http-client"
-        ]
-    },
     "scripts": {
         "analyse": "psalm --threads=8",
         "check-style": "ecs check",
