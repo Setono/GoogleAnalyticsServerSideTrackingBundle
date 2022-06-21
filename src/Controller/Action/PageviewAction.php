@@ -31,6 +31,7 @@ final class PageviewAction
 
     private function resolveUrl(Request $request): string
     {
+        /** @var mixed $url */
         $url = $request->query->get('url');
         if (is_string($url) && '' !== $url) {
             return $url;
