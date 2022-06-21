@@ -8,8 +8,7 @@
 
         <service id="setono_google_analytics_server_side_tracking.filter.bot"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Filter\BotFilter">
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="cache.app"/>
+            <argument type="service" id="setono_bot_detection.bot_detector.default"/>
 
             <tag name="setono_google_analytics_server_side_tracking.filter"/>
         </service>
