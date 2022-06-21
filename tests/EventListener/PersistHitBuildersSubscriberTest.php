@@ -53,11 +53,11 @@ final class PersistHitBuildersSubscriberTest extends TestCase
                 return [];
             }
 
-            protected function configureRoutes(RoutingConfigurator $routingConfigurator): void
+            protected function configureRoutes(RoutingConfigurator $routingConfigurator)
             {
             }
 
-            protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
+            protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
             {
             }
         };
