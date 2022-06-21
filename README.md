@@ -60,6 +60,14 @@ setono_google_analytics_server_side_tracking:
     send_delay: 600 # Wait a minimum of 10 minutes before sending a hit
 ```
 
+Add routing:
+
+```yaml
+# config/routes/setono_google_analytics_server_side_tracking.yaml
+imports:
+    - { resource: "@SetonoGoogleAnalyticsServerSideTrackingBundle/Resources/config/routes.yaml" }
+```
+
 ## Usage
 
 Out of the box, the bundle will start tracking visitors just like the client side integration will, but just as with
