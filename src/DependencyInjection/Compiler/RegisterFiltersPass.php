@@ -18,6 +18,7 @@ final class RegisterFiltersPass implements CompilerPassInterface
 
         $filter = $container->getDefinition('setono_google_analytics_server_side_tracking.filter.composite');
 
+        /** @var string $id */
         foreach (array_keys($container->findTaggedServiceIds('setono_google_analytics_server_side_tracking.filter')) as $id) {
             $filter->addMethodCall('add', [new Reference($id)]);
         }
