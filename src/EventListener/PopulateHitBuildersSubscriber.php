@@ -6,12 +6,15 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Response\Adapter\SymfonyResponseAdapter;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PopulateHitBuildersSubscriber implements EventSubscriberInterface
 {
+    use MainRequestTrait;
+
     private HitBuilderStackInterface $hitBuilderStack;
 
     public function __construct(HitBuilderStackInterface $hitBuilderStack)
@@ -28,7 +31,7 @@ final class PopulateHitBuildersSubscriber implements EventSubscriberInterface
 
     public function populateFromResponse(ResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$this->isMainRequest($event)) {
             return;
         }
 

@@ -7,12 +7,15 @@ namespace Setono\GoogleAnalyticsServerSideTrackingBundle\EventListener;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsServerSideTrackingBundle\Persister\HitPersisterInterface;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PersistHitBuildersSubscriber implements EventSubscriberInterface
 {
+    use MainRequestTrait;
+
     private HitBuilderStackInterface $hitBuilderStack;
 
     private HitPersisterInterface $hitPersister;
@@ -32,7 +35,7 @@ final class PersistHitBuildersSubscriber implements EventSubscriberInterface
 
     public function persist(ResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$this->isMainRequest($event)) {
             return;
         }
 

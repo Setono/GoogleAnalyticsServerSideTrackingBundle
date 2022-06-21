@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsServerSideTrackingBundle\Filter;
 
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class ProfilerFilter implements FilterInterface
 {
+    use MainRequestTrait;
+
     private RequestStack $requestStack;
 
     public function __construct(RequestStack $requestStack)
@@ -21,7 +24,7 @@ final class ProfilerFilter implements FilterInterface
 
     public function filter(HitBuilderInterface $hitBuilder): bool
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->getMainRequestFromRequestStack($this->requestStack);
         if (null === $request) {
             return true;
         }

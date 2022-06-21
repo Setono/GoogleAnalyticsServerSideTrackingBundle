@@ -10,10 +10,13 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Hit\HitBuilderStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Adapter\SymfonyRequestAdapter;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\LanguageResolverInterface;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class HitBuilderFactory implements HitBuilderFactoryInterface
 {
+    use MainRequestTrait;
+
     private RequestStack $requestStack;
 
     private ClientIdProviderInterface $clientIdProvider;
@@ -48,7 +51,7 @@ final class HitBuilderFactory implements HitBuilderFactoryInterface
     {
         $this->hitBuilderStack->push($hitBuilder);
 
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->getMainRequestFromRequestStack($this->requestStack);
         if (null !== $request) {
             $hitBuilder->populateFromRequest(new SymfonyRequestAdapter($request, $this->languageResolver));
         }
