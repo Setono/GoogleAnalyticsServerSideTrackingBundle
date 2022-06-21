@@ -16,7 +16,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\WorkflowInterface;
-use Webmozart\Assert\Assert;
 
 final class SendHitsCommand extends Command
 {
@@ -101,8 +100,6 @@ final class SendHitsCommand extends Command
     private function getWorkflow(object $obj): WorkflowInterface
     {
         if (null === $this->workflow) {
-            Assert::true($this->workflowRegistry->has($obj, SendHitWorkflow::NAME));
-
             $this->workflow = $this->workflowRegistry->get($obj, SendHitWorkflow::NAME);
         }
 
