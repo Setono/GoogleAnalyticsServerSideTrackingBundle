@@ -60,6 +60,15 @@ jobs:
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^4.4"
+                    - "^5.4"
+                    - "^6.0"
+
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"
+
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -70,12 +79,14 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: "composer-require-checker, composer-unused"
+                    tools: "composer-require-checker, composer-unused, flex"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
             -   name: "Run maglnet/composer-require-checker"
                 run: "composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
@@ -98,6 +109,15 @@ jobs:
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^4.4"
+                    - "^5.4"
+                    - "^6.0"
+
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"
+
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -108,11 +128,14 @@ jobs:
                     php-version: "${{ matrix.php-version }}"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     coverage: "none"
+                    tools: "flex"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
             -   name: "Static analysis"
                 run: "composer analyse"
@@ -132,6 +155,15 @@ jobs:
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^4.4"
+                    - "^5.4"
+                    - "^6.0"
+
+                exclude:
+                    -   php-version: "7.4"
+                        symfony: "^6.0"
+
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v3"
@@ -142,11 +174,14 @@ jobs:
                     php-version: "${{ matrix.php-version }}"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     coverage: "none"
+                    tools: "flex"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v2"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
             -   name: "Run phpunit"
                 run: "composer phpunit"
