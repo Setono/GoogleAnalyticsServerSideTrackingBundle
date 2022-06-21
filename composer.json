@@ -47,7 +47,7 @@
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.2",
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
-        "weirdan/doctrine-psalm-plugin": "^1.2"
+        "weirdan/doctrine-psalm-plugin": "^1.2 || ^2.0"
     },
     "prefer-stable": true,
     "autoload": {
