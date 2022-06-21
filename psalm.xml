@@ -29,5 +29,6 @@
                 <file name="tests/EventListener/PersistHitBuildersSubscriberTest.php"/>
             </errorLevel>
         </DeprecatedConstant>
+        <UnnecessaryVarAnnotation errorLevel="suppress"/> <!-- We only use var annotations when they are necessary for other tools to work (i.e. your IDE) or for compatibility issues between versions of dependencies -->
     </issueHandlers>
 </psalm>
