@@ -1,7 +1,6 @@
 # Symfony Google Analytics Server Side Tracking Bundle
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 
@@ -135,7 +134,6 @@ is one of `2xx`, `4xx`, or `5xx`. All events are persisted no matter what, thoug
 No. Out of the box, hit builders are populated with request and response parameters, i.e. the url, user agent, document title etc.
 
 [ico-version]: https://poser.pugx.org/setono/google-analytics-server-side-tracking-bundle/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/google-analytics-server-side-tracking-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/google-analytics-server-side-tracking-bundle/license
 [ico-github-actions]: https://github.com/Setono/GoogleAnalyticsServerSideTrackingBundle/workflows/build/badge.svg
 
