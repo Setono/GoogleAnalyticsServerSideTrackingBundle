@@ -22,12 +22,13 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtensionTest extends Abstrac
     /**
      * @test
      */
-    public function it_can_load(): void
+    public function it_sets_parameters(): void
     {
-        $this->setParameter('kernel.debug', true);
-
         $this->load();
 
-        self::assertTrue(true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics_server_side_tracking.consent.enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics_server_side_tracking.properties', []);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics_server_side_tracking.send_delay', 300);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics_server_side_tracking.prune_delay', 1440);
     }
 }
