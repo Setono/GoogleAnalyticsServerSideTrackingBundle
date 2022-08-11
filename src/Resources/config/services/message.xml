@@ -6,12 +6,15 @@
         <service id="setono_google_analytics_server_side_tracking.message.handler.override_document_location_url"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Message\Handler\OverrideDocumentLocationUrlHandler">
             <argument type="service" id="setono_google_analytics_server_side_tracking.hit.page_view_hit_builder"/>
+
             <tag name="messenger.message_handler"/>
         </service>
 
         <service id="setono_google_analytics_server_side_tracking.message.handler.persist_hit"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Message\Handler\PersistHitHandler">
             <argument type="service" id="doctrine"/>
+            <argument>%setono_google_analytics_server_side_tracking.consent.enabled%</argument>
+
             <tag name="messenger.message_handler"/>
         </service>
     </services>

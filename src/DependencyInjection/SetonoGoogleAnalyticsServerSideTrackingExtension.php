@@ -19,10 +19,11 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{properties: array, send_delay: int, prune_delay: int} $config
+         * @var array{consent: array{enabled: bool}, properties: array, send_delay: int, prune_delay: int} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
+        $container->setParameter('setono_google_analytics_server_side_tracking.consent.enabled', $config['consent']['enabled']);
         $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
         $container->setParameter('setono_google_analytics_server_side_tracking.send_delay', $config['send_delay']);
         $container->setParameter('setono_google_analytics_server_side_tracking.prune_delay', $config['prune_delay']);
@@ -35,7 +36,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        if ($container->getParameter('kernel.debug') === true) {
+        if ($container->hasParameter('kernel.debug') && $container->getParameter('kernel.debug') === true) {
             $loader->load('services/debug/filter.xml');
         }
     }

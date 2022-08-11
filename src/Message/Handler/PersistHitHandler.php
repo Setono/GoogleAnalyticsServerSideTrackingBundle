@@ -14,14 +14,21 @@ final class PersistHitHandler implements MessageHandlerInterface
 {
     use ORMManagerTrait;
 
-    public function __construct(ManagerRegistry $managerRegistry)
+    private bool $consent;
+
+    public function __construct(ManagerRegistry $managerRegistry, bool $consent = true)
     {
         $this->managerRegistry = $managerRegistry;
+        $this->consent = $consent;
     }
 
     public function __invoke(PersistHit $message): void
     {
         $hit = Hit::createFromCommand($message);
+        if (!$this->consent) {
+            $hit->setConsentGranted(true);
+        }
+
         $manager = $this->getManager($hit);
         $manager->persist($hit);
         $manager->flush();
