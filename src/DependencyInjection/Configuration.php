@@ -39,6 +39,13 @@ final class Configuration implements ConfigurationInterface
                     ->defaultValue(1440) // 24 hours
                     ->info('The number of minutes to wait before hits are removed from the hits table')
                 ->end()
+                ->arrayNode('filters')
+                    ->children()
+                        ->arrayNode('user_agent')
+                            ->scalarPrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

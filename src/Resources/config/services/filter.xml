@@ -13,6 +13,13 @@
             <tag name="setono_google_analytics_server_side_tracking.filter"/>
         </service>
 
+        <service id="setono_google_analytics_server_side_tracking.filter.configurable_user_agent"
+                 class="Setono\GoogleAnalyticsServerSideTrackingBundle\Filter\ConfigurableUserAgentFilter">
+            <argument>%setono_google_analytics_server_side_tracking.filters.user_agent%</argument>
+
+            <tag name="setono_google_analytics_server_side_tracking.filter"/>
+        </service>
+
         <service id="setono_google_analytics_server_side_tracking.filter.empty_user_agent"
                  class="Setono\GoogleAnalyticsServerSideTrackingBundle\Filter\EmptyUserAgentFilter">
             <tag name="setono_google_analytics_server_side_tracking.filter"/>
