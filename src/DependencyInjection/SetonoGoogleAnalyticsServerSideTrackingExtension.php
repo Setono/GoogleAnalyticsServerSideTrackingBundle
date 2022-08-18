@@ -19,7 +19,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{consent: array{enabled: bool}, properties: array, send_delay: int, prune_delay: int} $config
+         * @var array{consent: array{enabled: bool}, properties: array, send_delay: int, prune_delay: int, filters: array{user_agent: list<string>}} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
@@ -27,6 +27,7 @@ final class SetonoGoogleAnalyticsServerSideTrackingExtension extends Extension i
         $container->setParameter('setono_google_analytics_server_side_tracking.properties', $config['properties']);
         $container->setParameter('setono_google_analytics_server_side_tracking.send_delay', $config['send_delay']);
         $container->setParameter('setono_google_analytics_server_side_tracking.prune_delay', $config['prune_delay']);
+        $container->setParameter('setono_google_analytics_server_side_tracking.filters.user_agent', $config['filters']['user_agent'] ?? []);
 
         $container
             ->registerForAutoconfiguration(FilterInterface::class)
