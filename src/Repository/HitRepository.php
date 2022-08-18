@@ -66,7 +66,6 @@ class HitRepository extends ServiceEntityRepository implements HitRepositoryInte
             ->getResult()
         ;
 
-        Assert::isArray($result);
         Assert::allIsInstanceOf($result, HitInterface::class);
 
         return $result;
