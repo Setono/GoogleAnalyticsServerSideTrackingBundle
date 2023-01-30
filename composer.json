@@ -38,6 +38,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "ext-json": "*",
         "kriswallsmith/buzz": "^1.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "nyholm/symfony-bundle-test": "^1.8",

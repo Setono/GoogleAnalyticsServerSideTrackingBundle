@@ -1,0 +1,4 @@
+setono_google_analytics_server_side_tracking_pageview:
+    methods: [GET, POST]
+    path: /pageview
+    controller: setono_google_analytics_server_side_tracking.controller.action.pageview
