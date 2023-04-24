@@ -9,12 +9,6 @@
             "email": "joachim@loevgaard.dk"
         }
     ],
-    "repositories": [
-        {
-            "url": "https://github.com/imaginarica/ClientIdBundle.git",
-            "type": "vcs"
-        }
-    ],
     "require": {
         "php": ">=7.4",
         "doctrine/doctrine-bundle": "^1.12 || ^2.2",
