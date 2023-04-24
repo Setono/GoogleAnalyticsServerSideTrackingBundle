@@ -9,6 +9,12 @@
             "email": "joachim@loevgaard.dk"
         }
     ],
+    "repositories": [
+        {
+            "url": "https://github.com/embaka/google-analytics-measurement-protocol.git",
+            "type": "vcs"
+        }
+    ],
     "require": {
         "php": ">=7.4",
         "doctrine/doctrine-bundle": "^1.12 || ^2.2",
@@ -22,7 +28,7 @@
         "setono/consent-bundle": "^0.1",
         "setono/consent-contracts": "^0.1.3",
         "setono/doctrine-object-manager-trait": "^1.0",
-        "setono/google-analytics-measurement-protocol": "v1.0.0-alpha.3 || 1.x-dev",
+        "setono/google-analytics-measurement-protocol": "dev-1.x",
         "setono/symfony-main-request-trait": "^1.0",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",
         "symfony/console": "^4.4 || ^5.4 || ^6.0",
